@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find Doctors | MediBook</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">♧</span><span><strong>Medi<span>Book</span></strong><small>HEALTHCARE SAAS</small></span></a><button class="menu-toggle" aria-label="Toggle navigation">☰</button><nav class="main-nav"><a href="index.html">Home</a><a class="active" href="doctors.html">Find Doctors</a><a href="index.html#about">About Platform</a></nav><div class="nav-actions"><a class="login-link" href="login.html">Log In</a><a class="button button-small" href="register.html">Get Started <span>→</span></a></div></div></header>
+  <main class="doctors-page"><section class="container search-panel doctor-search"><div class="search-field">⌕ <input id="doctor-search" type="search" placeholder="Search doctors or specialties"></div><div class="search-field">♧ <select id="doctor-specialty"><option value="">All Specialties</option><option>General Physician</option><option>Cardiologist</option><option>Dermatologist</option><option>Pediatrician</option><option>Neurologist</option><option>Orthopedic</option><option>Dentist</option><option>Gynecologist</option></select></div><div class="search-field">⌖ <input id="doctor-location" placeholder="Location (e.g. Bengaluru)"></div><button class="button" id="doctor-search-button">Search →</button></section>
+    <section class="container section-pad specialties"><div class="section-heading centered"><h1>Explore Popular Specialties</h1><p>Find certified healthcare experts tailored to your medical needs and book an online or in-clinic visit.</p></div><div class="specialty-grid" id="specialty-grid"></div></section>
+    <section class="container doctors-results section-pad"><div class="section-heading"><span class="eyebrow">RECOMMENDED FOR YOU</span><h2>Available specialists</h2></div><div class="doctor-list" id="doctor-list"></div></section>
+  </main>
+  <footer class="site-footer compact-footer"><div class="container footer-bottom"><span>© 2025 MediBook. All rights reserved.</span><a href="index.html">Back to home →</a></div></footer><script src="js/script.js"></script>
+</body>
+</html>
