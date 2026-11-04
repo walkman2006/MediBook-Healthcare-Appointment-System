@@ -1,0 +1,28 @@
+{
+  "name": "medibook-2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walkman2006/MediBook-Healthcare-Appointment-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/walkman2006/MediBook-Healthcare-Appointment-System/issues"
+  },
+  "homepage": "https://github.com/walkman2006/MediBook-Healthcare-Appointment-System#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^5.1.0",
+    "jsdom": "^29.1.1",
+    "vitest": "^5.1.0"
+  }
+}
