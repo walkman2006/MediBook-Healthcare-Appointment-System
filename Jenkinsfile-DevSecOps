@@ -1,0 +1,83 @@
+
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+    }
+
+    environment {
+        DOCKER_EXE = 'C:\\Users\\ttkis\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+        NPM_EXE = 'C:\\Program Files\\nodejs\\npm.cmd'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat '"%NPM_EXE%" ci'
+            }
+        }
+
+        stage('Automated Tests & Coverage') {
+            steps {
+                bat '"%NPM_EXE%" run coverage'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarScanner'
+
+                    withSonarQubeEnv('MediBook-SonarQube') {
+                        bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+                    }
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat '"%DOCKER_EXE%" build -t medibook:latest .'
+            }
+        }
+
+        stage('Deploy MediBook') {
+            steps {
+                script {
+                    // Stop and remove the previous container if it exists.
+                    bat(
+                        script: '"%DOCKER_EXE%" stop medibook-container',
+                        returnStatus: true
+                    )
+
+                    bat(
+                        script: '"%DOCKER_EXE%" rm medibook-container',
+                        returnStatus: true
+                    )
+
+                    // Start the newly built application.
+                    bat '"%DOCKER_EXE%" run -d --name medibook-container --restart unless-stopped -p 8081:80 medibook:latest'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'MediBook CI/CD Pipeline completed successfully!'
+            echo 'Application URL: http://localhost:8081'
+        }
+
+        failure {
+            echo 'MediBook CI/CD Pipeline failed. Check the stage logs.'
+        }
+    }
+}
