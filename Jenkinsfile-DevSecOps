@@ -68,11 +68,11 @@ pipeline {
                 }
             }
         }
-                        stage('Deploy to Render') {
+                 stage('Deploy to Render') {
             steps {
                 withCredentials([string(credentialsId: 'render-deploy-hook', variable: 'RENDER_DEPLOY_HOOK')]) {
                     bat '''
-                        powershell.exe -NoProfile -NonInteractive -Command "try { (Invoke-WebRequest -Uri $env:RENDER_DEPLOY_HOOK -Method Post -ErrorAction Stop).StatusCode } catch { Write-Error $_; exit 1 }"
+                        powershell.exe -NoProfile -NonInteractive -Command "try { $response = Invoke-WebRequest -UseBasicParsing -Uri $env:RENDER_DEPLOY_HOOK -Method Post -ErrorAction Stop; Write-Output $response.StatusCode } catch { Write-Output $_.Exception.Message; exit 1 }"
                     '''
                 }
             }
